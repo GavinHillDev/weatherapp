@@ -31,34 +31,34 @@ let daysu = document.getElementById('daysu')
 function dayChecker() {
     const d = new Date();
     let day = d.getDay();
-    console.log(day)
+
     switch (day) {
         case 1:
-            console.log("Monday")
+
             daym.style.color = "yellow"
             break;
         case 2:
-            console.log("Tuesday")
+
             dayt.style.color = "yellow"
             break;
         case 3:
-            console.log("Wednesday")
+
             dayw.style.color = "yellow"
             break;
         case 4:
-            console.log("Thursday")
+
             dayth.style.color = "yellow"
             break;
         case 5:
-            console.log("Friday")
+
             dayf.style.color = "yellow"
             break;
         case 6:
-            console.log("Saturday")
+
             daysa.style.color = "yellow"
             break;
         case 7:
-            console.log("Sunday")
+
             daysu.style.color = "yellow"
             break;
     }
@@ -67,9 +67,9 @@ function dayChecker() {
 dayChecker()
 async function initialSite() {
     let site = await
-        fetch('http://api.openweathermap.org/data/2.5/weather?q=Georgia&appid=7df1cef7eb1d1b6656ac681f899e4a4f')
+        fetch('http://api.openweathermap.org/data/2.5/weather?q=Georgia&appid='+ key.appid)
     const data = await site.json()
-    console.log(data)
+
     city.innerText = data.name
     coor.innerText = data.weather[0].main
     temp.innerText = Math.round((data.main.temp - 273.15) * 1.8 + 32) + " F"
@@ -77,7 +77,7 @@ async function initialSite() {
         const k = data.main.temp
         const f = Math.round((k - 273.15) * 1.8 + 32)
         temp.innerText = f + ' F'
-        console.log(k)
+
     })
     cel.addEventListener('click', function changeF() {
         const k = data.main.temp
@@ -88,10 +88,10 @@ async function initialSite() {
 initialSite()
 async function initalSiteExtended() {
     let forecast = await
-        fetch('https://api.openweathermap.org/data/2.5/onecall?lat=32.7504&lon=-83.5002&exclude={hourly,minutely}&appid=7df1cef7eb1d1b6656ac681f899e4a4f')
+        fetch('https://api.openweathermap.org/data/2.5/onecall?lat=32.7504&lon=-83.5002&exclude={hourly,minutely}&appid='+ key.appid)
     const fore = await forecast.json()
     //Days
-    console.log(fore)
+
     let mond = (fore.daily[0].temp.max - 273.15) * 1.8 + 32
     let tues = (fore.daily[1].temp.max - 273.15) * 1.8 + 32
     let wedn = (fore.daily[2].temp.max - 273.15) * 1.8 + 32
@@ -114,7 +114,7 @@ async function initalSiteExtended() {
     let friweather = fore.daily[4].weather[0].main
     let satweather = fore.daily[5].weather[0].main
     let sunweather = fore.daily[6].weather[0].main
-    console.log()
+
     weatherDeterm(monweather, tueweather, wedweather, thurweather, friweather, satweather, sunweather)
     far.addEventListener('click', function changeF() {
         let mond = (fore.daily[0].temp.max - 273.15) * 1.8 + 32
@@ -152,9 +152,9 @@ async function initalSiteExtended() {
 initalSiteExtended()
 button.addEventListener('click', async function getWeather() {
     let site = await
-        fetch('http://api.openweathermap.org/data/2.5/weather?q=' + form.value + '&appid=7df1cef7eb1d1b6656ac681f899e4a4f')
+        fetch('http://api.openweathermap.org/data/2.5/weather?q=' + form.value + '&appid='+ key.appid)
     const data = await site.json()
-    console.log(data)
+
     city.innerText = data.name
     coor.innerText = data.weather[0].main
     temp.innerText = Math.round((data.main.temp - 273.15) * 1.8 + 32) + " F"
@@ -177,10 +177,10 @@ button.addEventListener('click', async function getWeather() {
 })
 async function weatherForecast(lo, la) {
     let forecast = await
-        fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + la + '&lon=' + lo + '&exclude={hourly,minutely}&appid=7df1cef7eb1d1b6656ac681f899e4a4f')
+        fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + la + '&lon=' + lo + '&exclude={hourly,minutely}&appid='+ key.appid)
     const fore = await forecast.json()
     //Days
-    console.log(fore)
+
     let mond = (fore.daily[0].temp.max - 273.15) * 1.8 + 32
     let tues = (fore.daily[1].temp.max - 273.15) * 1.8 + 32
     let wedn = (fore.daily[2].temp.max - 273.15) * 1.8 + 32
@@ -203,7 +203,7 @@ async function weatherForecast(lo, la) {
     let friweather = fore.daily[4].weather[0].main
     let satweather = fore.daily[5].weather[0].main
     let sunweather = fore.daily[6].weather[0].main
-    console.log()
+
     weatherDeterm(monweather, tueweather, wedweather, thurweather, friweather, satweather, sunweather)
 }
 async function weatherDeterm(monweather, tueweather, wedweather, thurweather, friweather, satweather, sunweather) {
